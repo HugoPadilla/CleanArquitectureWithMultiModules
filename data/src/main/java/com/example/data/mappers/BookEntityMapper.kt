@@ -1,5 +1,6 @@
 package com.example.data.mappers
 
+import com.example.data.entities.Book
 import com.example.data.entities.BookEntity
 import com.example.domain.entities.Volume
 import com.example.domain.entities.VolumeInfo
@@ -18,6 +19,15 @@ class BookEntityMapper {
         return Volume(
             id = bookEntity.id,
             volumeInfo = VolumeInfo(bookEntity.title, bookEntity.authors, bookEntity.imageUrl)
+        )
+    }
+
+    fun toBook(bookEntity: Volume): Book {
+        return Book(
+            id = bookEntity.id,
+            title = bookEntity.volumeInfo.title,
+            authors = bookEntity.volumeInfo.author,
+            imageUrl = bookEntity.volumeInfo.imageUrl
         )
     }
 }

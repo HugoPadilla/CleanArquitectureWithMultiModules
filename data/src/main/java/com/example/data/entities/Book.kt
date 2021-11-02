@@ -1,5 +1,7 @@
 package com.example.data.entities
 
+import com.example.domain.entities.Volume
+import com.example.domain.entities.VolumeInfo
 import com.google.firebase.firestore.DocumentId
 
 data class Book(
@@ -16,5 +18,12 @@ fun toBookEntity(book: Book): BookEntity {
         title = book.title,
         authors = book.authors,
         imageUrl = book.imageUrl
+    )
+}
+
+fun toVolume(book: Book): Volume {
+    return Volume(
+        id = book.id.toString(),
+        volumeInfo = VolumeInfo(title = book.title, author = book.authors, imageUrl = book.imageUrl)
     )
 }

@@ -18,8 +18,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonInsertData.setOnClickListener {
+        binding.buttonGetBooks.setOnClickListener {
             viewModel.getBooks("Name Autho")
+        }
+
+        binding.buttonGetBoosById.setOnClickListener {
+            viewModel.getBook("rqe31bv1QYcEnqn008mB")
+        }
+
+        binding.buttonInsertBook.setOnClickListener {
+            viewModel.setBook()
         }
 
         viewModel.dataLoading.observe(this, {

@@ -1,6 +1,7 @@
 package com.example.data.repositories
 
 import com.example.data.mappers.BookEntityMapper
+import com.example.domain.common.State
 import com.example.domain.entities.Volume
 import com.example.domain.repositories.BooksRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,13 +14,15 @@ class BooksRepositoryImpl(
     override suspend fun getBooks(): Flow<List<Volume>> {
         val mapper = BookEntityMapper()
         return remoteDataSource.getBooks().map { value -> value.map { mapper.toVolume(it) } }
-        /*
-        val recipient = ArrayList<Volume>()
-        val result = remoteDataSource.getBooks()
-        result.map {
-            recipient.add(mapper.toVolume(it))
-        }
-        return recipient*/
+    }
+
+    override suspend fun getBookById(id: String): Flow<State<Volume>> {
+        return remoteDataSource.getBookById(id)
+    }
+
+    override suspend fun insertBook(volume: Volume): Flow<State<String>> {
+        val mapper = BookEntityMapper()
+        return remoteDataSource.insertBook(mapper.toBook(volume))
     }
 
     override suspend fun getBookmarks(): Flow<List<Volume>> {
