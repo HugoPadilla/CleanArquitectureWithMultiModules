@@ -2,7 +2,7 @@ package com.example.cleanarquitecturewithmodules.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.cleanarquitecturewithmodules.ApiFirestore.RemoteDataFirestoreImpl
+import com.example.data.apiservice.RemoteDataFirestoreImpl
 import com.example.data.apiservice.RemoteDataFirestore
 import com.example.data.db.RoomDatabase
 import com.example.data.repositories.*

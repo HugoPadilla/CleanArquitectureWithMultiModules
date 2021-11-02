@@ -1,6 +1,5 @@
-package com.example.cleanarquitecturewithmodules.ApiFirestore
+package com.example.data.apiservice
 
-import com.example.data.apiservice.RemoteDataFirestore
 import com.example.data.entities.Book
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
