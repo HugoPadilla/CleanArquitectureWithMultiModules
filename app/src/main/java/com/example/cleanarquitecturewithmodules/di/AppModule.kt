@@ -2,9 +2,12 @@ package com.example.cleanarquitecturewithmodules.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.cleanarquitecturewithmodules.ApiFirestore.RemoteDataFirestoreImpl
+import com.example.data.apiservice.RemoteDataFirestore
 import com.example.data.db.RoomDatabase
 import com.example.data.repositories.*
 import com.example.domain.repositories.BooksRepository
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,10 +19,20 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object AppModule {
 
+    @Provides
+    fun providerFirebaseFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
+    }
+
+    @Provides
+    fun providerRemoteDataFirestore(db: FirebaseFirestore): RemoteDataFirestore {
+        return RemoteDataFirestoreImpl(db)
+    }
+
     @Singleton
     @Provides
-    fun providerBooksRemoteDataSource(): BooksRemoteDataSource {
-        return BooksRemoteDataSourceImpl()
+    fun providerBooksRemoteDataSource(remoteDataFirestore: RemoteDataFirestore): BooksRemoteDataSource {
+        return BooksRemoteDataSourceImpl(remoteDataFirestore)
     }
 
     @Singleton

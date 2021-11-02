@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface BooksRepository {
 
-    suspend fun getRemoteBooks(author: String): List<Volume>
+    suspend fun getBooks(): Flow<List<Volume>>
 
     suspend fun getBookmarks(): Flow<List<Volume>>
 

@@ -5,13 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecasesinteratores.GetBookUseCase
-import kotlinx.coroutines.delay
+import com.example.domain.usecasesinteratores.GetAllBooksUseCase
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class BookViewModel  @ViewModelInject constructor(
-    private val getBookUseCase: GetBookUseCase
-): ViewModel() {
+class BookViewModel @ViewModelInject constructor(
+    private val getAllBooksUseCase: GetAllBooksUseCase
+) : ViewModel() {
 
     private val _dataLoading = MutableLiveData(true)
     val dataLoading: LiveData<Boolean> = _dataLoading
@@ -28,9 +28,13 @@ class BookViewModel  @ViewModelInject constructor(
         viewModelScope.launch {
             _dataLoading.postValue(true)
             _books.postValue("")
-            val booksResult = getBookUseCase(author)
-            delay(3000)
-            _books.postValue(booksResult.toString())
+            try {
+                getAllBooksUseCase(author).collect { listVolume ->
+                    _books.value = listVolume.toString()
+                }
+            } catch (e: Throwable) {
+                _books.postValue("Error al cargar datos: ${e.message}")
+            }
             _dataLoading.postValue(false)
         }
     }

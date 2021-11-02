@@ -53,6 +53,12 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
+    // Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    // Dependency for the Firebase SDK
+    // Add the dependencies for any other desired Firebase products
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

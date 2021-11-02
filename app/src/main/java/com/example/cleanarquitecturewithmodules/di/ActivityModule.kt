@@ -1,7 +1,7 @@
 package com.example.cleanarquitecturewithmodules.di
 
 import com.example.domain.repositories.BooksRepository
-import com.example.domain.usecasesinteratores.GetBookUseCase
+import com.example.domain.usecasesinteratores.GetAllBooksUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,8 +14,8 @@ object ActivityModule {
     @Provides
     fun providerGetBookUseCase(
         booksRepository: BooksRepository
-    ): GetBookUseCase {
-        return GetBookUseCase(booksRepository)
+    ): GetAllBooksUseCase {
+        return GetAllBooksUseCase(booksRepository)
     }
 
 }

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "393046995325",
+    "project_id": "books-clean-architecture",
+    "storage_bucket": "books-clean-architecture.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393046995325:android:7d54a6fb672dd44a5c1c14",
+        "android_client_info": {
+          "package_name": "com.example.cleanarquitecturewithmodules"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393046995325-slfsqcre0i7uoebf5m9494ljnilha02b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cleanarquitecturewithmodules",
+            "certificate_hash": "57428c90ad805bda5198fabb92792b95d3501380"
+          }
+        },
+        {
+          "client_id": "393046995325-of7g5d0vqrf446f48vpg7sh1bg0vo8el.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEPmf_El2lHIW2O-BrP1J0oNmg-Ve11oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393046995325-of7g5d0vqrf446f48vpg7sh1bg0vo8el.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

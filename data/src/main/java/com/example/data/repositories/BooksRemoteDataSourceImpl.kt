@@ -1,12 +1,18 @@
 package com.example.data.repositories
 
+import com.example.data.apiservice.RemoteDataFirestore
 import com.example.data.entities.BookEntity
+import com.example.data.entities.toBookEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class BooksRemoteDataSourceImpl: BooksRemoteDataSource {
-    override fun getBooks(author: String): List<BookEntity> {
-        return listOf<BookEntity>(
-            BookEntity("1234","Titulo 1", listOf("Payton Woolley", "Jayce Mcmahon"), null),
-            BookEntity("1353", "Titulo 2", listOf("Braiden Hussain", "Stevie Barber"), null)
-        )
+class BooksRemoteDataSourceImpl(private val remoteDataFirestore: RemoteDataFirestore) :
+    BooksRemoteDataSource {
+    override suspend fun getBooks(): Flow<List<BookEntity>> {
+        return remoteDataFirestore.getBooks().map { listBook ->
+            listBook.map { book ->
+                toBookEntity(book)
+            }
+        }
     }
 }
