@@ -1,20 +1,22 @@
 package com.example.cleanarquitecturewithmodules.presentation
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.common.State
 import com.example.domain.entities.Volume
-import com.example.domain.entities.VolumeInfo
 import com.example.domain.usecasesinteratores.GetAllBooksUseCase
 import com.example.domain.usecasesinteratores.GetBookUseCase
 import com.example.domain.usecasesinteratores.InsertBooksUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BookViewModel @ViewModelInject constructor(
+@HiltViewModel
+class BookViewModel @Inject constructor(
     private val getAllBooksUseCase: GetAllBooksUseCase,
     private val getBookUseCase: GetBookUseCase,
     private val insertBooksUseCase: InsertBooksUseCase
@@ -23,30 +25,32 @@ class BookViewModel @ViewModelInject constructor(
     private val _dataLoading = MutableLiveData(true)
     val dataLoading: LiveData<Boolean> = _dataLoading
 
-    private val _books = MutableLiveData<String>()
-    val books: LiveData<String> = _books
+    private val _books = MutableStateFlow<List<Volume>>(listOf())
+    val books: StateFlow<List<Volume>> = _books
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
     //private val _remoteBooks = arrayListOf<Volume>()
+    init {
+        getBooks()
+    }
 
-    fun getBooks(author: String) {
+    fun getBooks() {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            _books.postValue("")
             try {
-                getAllBooksUseCase(author).collect { listVolume ->
-                    _books.value = listVolume.toString()
+                getAllBooksUseCase().collect { listVolume ->
+                    _books.value = listVolume
                 }
             } catch (e: Throwable) {
-                _books.postValue("Error al cargar datos: ${e.message}")
+                //_books.postValue("Error al cargar datos: ${e.message}")
             }
             _dataLoading.postValue(false)
         }
     }
 
-    fun getBook(id: String) {
+    /*fun getBook(id: String) {
         viewModelScope.launch {
             _dataLoading.postValue(true)
             _books.postValue("")
@@ -88,6 +92,6 @@ class BookViewModel @ViewModelInject constructor(
             }
             _dataLoading.postValue(false)
         }
-    }
+    }*/
 
 }

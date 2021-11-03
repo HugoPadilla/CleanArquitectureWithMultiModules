@@ -2,8 +2,8 @@ package com.example.cleanarquitecturewithmodules.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.data.apiservice.RemoteDataFirestoreImpl
 import com.example.data.apiservice.RemoteDataFirestore
+import com.example.data.apiservice.RemoteDataFirestoreImpl
 import com.example.data.db.RoomDatabase
 import com.example.data.repositories.*
 import com.example.domain.repositories.BooksRepository
@@ -11,12 +11,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
     @Provides

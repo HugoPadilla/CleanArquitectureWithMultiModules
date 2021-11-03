@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 class GetAllBooksUseCase(
     private val booksRepository: BooksRepository
 ) {
-    suspend operator fun invoke(author: String): Flow<List<Volume>> = booksRepository.getBooks()
+    suspend operator fun invoke(): Flow<List<Volume>> = booksRepository.getBooks()
 }

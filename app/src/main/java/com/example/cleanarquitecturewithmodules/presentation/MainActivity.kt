@@ -19,15 +19,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonGetBooks.setOnClickListener {
-            viewModel.getBooks("Name Autho")
+            viewModel.getBooks()
         }
 
         binding.buttonGetBoosById.setOnClickListener {
-            viewModel.getBook("rqe31bv1QYcEnqn008mB")
+            //viewModel.getBook("rqe31bv1QYcEnqn008mB")
         }
 
         binding.buttonInsertBook.setOnClickListener {
-            viewModel.setBook()
+           // viewModel.setBook()
         }
 
         viewModel.dataLoading.observe(this, {
@@ -36,9 +36,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.books.observe(this, {
+       /* viewModel.books.observe(this, {
             binding.textView.text = it
-        })
+        })*/
     }
 
 }
